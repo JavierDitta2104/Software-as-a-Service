@@ -3,8 +3,9 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const dns = require('dns');
+const path = require('path');
 
-dotenv.config();
+dotenv.config({ path: path.join(__dirname, '.env') });
 
 // Force Google DNS to bypass local SRV lookup issues
 dns.setServers(['8.8.8.8', '8.8.4.4']);
@@ -23,6 +24,7 @@ app.use('/api/lists', require('./routes/lists'));
 app.use('/api/cards', require('./routes/cards'));
 app.use('/api/stats', require('./routes/stats'));
 app.use('/api/activity', require('./routes/activity'));
+app.use('/api/ai', require('./routes/ai'));
 
 // Basic Route
 app.get('/', (req, res) => {

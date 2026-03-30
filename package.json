@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev:server": "cd server && npm start",
+    "dev:server": "cd server && npm run dev",
     "dev:client": "vite",
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -32,5 +32,8 @@
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.13.2",
     "vite": "^6.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0"
   }
 }

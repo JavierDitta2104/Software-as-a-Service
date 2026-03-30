@@ -10,13 +10,14 @@ const Login = ({ setToken }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError('');
         try {
             const res = await authService.login({ email, password });
             localStorage.setItem('token', res.data.token);
             setToken(res.data.token);
             navigate('/dashboard');
         } catch (err) {
-            setError('Invalid credentials');
+            setError(err.response?.data?.message || 'Credenciales inválidas');
         }
     };
 
@@ -24,24 +25,24 @@ const Login = ({ setToken }) => {
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
             <div className="glass" style={{ padding: '2.5rem', width: '100%', maxWidth: '400px' }}>
                 <h1 style={{ marginBottom: '1.5rem', textAlign: 'center' }}>AgilFlow</h1>
-                <p style={{ color: 'var(--text-muted)', marginBottom: '2rem', textAlign: 'center' }}>Welcome back, please login.</p>
+                <p style={{ color: 'var(--text-muted)', marginBottom: '2rem', textAlign: 'center' }}>Bienvenido, inicia sesión.</p>
                 
-                {error && <p style={{ color: 'var(--danger)', marginBottom: '1rem', textAlign: 'center' }}>{error}</p>}
+                {error && <p style={{ color: 'var(--danger)', marginBottom: '1rem', textAlign: 'center', fontSize: '0.875rem' }}>{error}</p>}
                 
                 <form onSubmit={handleSubmit}>
                     <div className="input-group">
-                        <label>Email Address</label>
+                        <label>Correo Electrónico</label>
                         <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
                     </div>
                     <div className="input-group">
-                        <label>Password</label>
+                        <label>Contraseña</label>
                         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                     </div>
-                    <button className="btn-primary" style={{ width: '100%' }} type="submit">Log In</button>
+                    <button className="btn-primary" style={{ width: '100%' }} type="submit">Iniciar Sesión</button>
                 </form>
                 
                 <p style={{ marginTop: '1.5rem', textAlign: 'center', fontSize: '0.875rem', color: 'var(--text-muted)' }}>
-                    Don't have an account? <Link to="/register" style={{ color: 'var(--primary)', textDecoration: 'none' }}>Register</Link>
+                    ¿No tienes una cuenta? <Link to="/register" style={{ color: 'var(--primary)', textDecoration: 'none' }}>Regístrate</Link>
                 </p>
             </div>
         </div>

@@ -18,6 +18,7 @@ api.interceptors.request.use((config) => {
 export const authService = {
     login: (credentials) => api.post('/auth/login', credentials),
     register: (userData) => api.post('/auth/register', userData),
+    verifyEmail: (email, code) => api.post('/auth/verify-email', { email, code }),
     getMe: () => api.get('/auth/me'),
 };
 
@@ -49,6 +50,10 @@ export const statsService = {
 
 export const activityService = {
     getBoardActivity: (boardId) => api.get(`/activity/board/${boardId}`)
+};
+
+export const aiService = {
+    parseTask: (text) => api.post('/ai/parse-task', { text })
 };
 
 export default api;

@@ -5,6 +5,7 @@ import Dashboard from './pages/Dashboard';
 import KanbanBoard from './pages/KanbanBoard';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import VerifyEmail from './pages/VerifyEmail';
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
@@ -23,6 +24,7 @@ function App() {
       <Routes>
         <Route path="/login" element={!token ? <Login setToken={setToken} /> : <Navigate to="/dashboard" />} />
         <Route path="/register" element={!token ? <Register setToken={setToken} /> : <Navigate to="/dashboard" />} />
+        <Route path="/verify-email" element={!token ? <VerifyEmail setToken={setToken} /> : <Navigate to="/dashboard" />} />
         
         <Route path="/dashboard" element={token ? <Dashboard /> : <Navigate to="/login" />} />
         <Route path="/board/:boardId" element={token ? <KanbanBoard /> : <Navigate to="/login" />} />
